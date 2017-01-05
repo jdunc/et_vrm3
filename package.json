@@ -1,0 +1,32 @@
+{
+  "name": "et_vrm",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shahzadkhan3iii7/Et_vrm.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shahzadkhan3iii7/Et_vrm/issues"
+  },
+  "homepage": "https://github.com/shahzadkhan3iii7/Et_vrm#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "chai": "^3.5.0",
+    "cookieparser": "^0.1.0",
+    "debug": "^2.6.0",
+    "express": "^4.14.0",
+    "knex": "^0.12.6",
+    "mocha": "^3.2.0",
+    "mongodb": "^2.2.19",
+    "mongoose": "^4.7.6",
+    "morgan": "^1.7.0",
+    "pg": "^6.1.2"
+  }
+}
