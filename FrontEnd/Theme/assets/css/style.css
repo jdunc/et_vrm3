@@ -422,14 +422,14 @@ ul.sidebar-menu li a.active i {
 .img-circle4 {
     float: left;
     padding: 15px;
-    height: 280px;
-    width: 385px;
+    height: 270px;
+    width: 395px;
 }
 
 .img-circle1 {
     float: left;
     padding: 15px;
-    height: 280px;
+    height: 270px;
     width: 320px;
 }
 
@@ -437,7 +437,7 @@ ul.sidebar-menu li a.active i {
     float: right;
     padding: 15px;
     height: 280px;
-    width: 385px;
+    width: 395px;
 }
 
 .flex {
@@ -473,6 +473,24 @@ ul.sidebar-menu li a.active i {
     width: 500px;
     height: 90px;
     border-color: orange;
+}
+
+#tapit3 {
+    background-color: #8470FF;
+    width: 300px;
+    height: 70px;
+    border-color: #8470FF;
+}
+
+#adultform {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-group {
+    width: 700px;
+    justify-content: center;
 }
 
 
