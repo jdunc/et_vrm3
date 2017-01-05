@@ -12,22 +12,3 @@ There are two types of check-in. Adult and Child. The Child needs a separate for
 There might be photograph and signature options.
 Other things coming soon!
 ```
-// ┌───────────────────────────────────────────────────────────────┐
-// │                            users                              │
-// ├─────────────┬─────────────────────────┬───────────────────────┤
-// │id           │serial                   │not null               │
-// |name         |varchar                  |not null               |
-// |appointment t|time                     |not null               |
-// │created_at   │timestamp with time zone │not null default now() │
-// │updated_at   │timestamp with time zone │not null default now() │
-// └─────────────┴─────────────────────────┴───────────────────────┘
-
-// ┌───────────────────────────────────────────────────────────────┐
-// │                            admin                              │
-// ├─────────────┬─────────────────────────┬───────────────────────┤
-// │id           │serial                   │not null               │
-// |name         |varchar                  |not null               |
-// |password     |hashed_password, char60  |not null               |
-// │created_at   │timestamp with time zone │not null default now() │
-// │updated_at   │timestamp with time zone │not null default now() │
-// └─────────────┴─────────────────────────┴───────────────────────┘
