@@ -1,13 +1,12 @@
 $(document).ready(function(){
-  console.log('child js loaded');
+  console.log('adult js loaded');
  $('#tapit3').click( function(e){
    e.preventDefault();
    let formData = {};
-   $('.childFormInfo').each(function(){
+   $('.adultFormInfo').each(function(){
       //  console.log($(this));
        formData[this.name] = $(this).val();
    });
-   formData['medication-change'] = $('input[name=medicationInfo]:checked').val();
    console.log('form info:',formData);
   //  $.post({
   //    data: JSON.stringify(formData),
