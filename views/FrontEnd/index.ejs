@@ -111,22 +111,26 @@
                             <hr>
                             <thead>
                                 <tr>
-                                    <th>#</th>
                                     <th>First Name</th>
                                     <th>Last Name</th>
                                     <th>Appointment Time</th>
+                                    <th>Arrival Time</th>
                                     <th>Payment</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>1:00 PM</td>
-                                    <td>YES</td>
-                                </tr>
-                                <tr>
+                              <tr>
+                                <% data.forEach((client) => { %>
+                                <td><%= client.firstName %></td>
+                                <td><%= client.lastName %></td>
+                                <td><%= client['appointment-time'] %></td>
+                                <td><%= client.created_at %></td>
+                                <td><%= client.paid %></td>
+                              </tr>
+                              <% }); %>
+
+
+                                <!-- <tr>
                                     <td>2</td>
                                     <td>Jacob</td>
                                     <td>Thornton</td>
@@ -139,7 +143,7 @@
                                     <td>Mosa</td>
                                     <td>2:30 PMr</td>
                                     <td>YES</td>
-                                </tr>
+                                </tr> -->
                             </tbody>
                         </table>
                     </div>

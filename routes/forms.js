@@ -48,8 +48,26 @@ router.post('/child', (req, res, next) =>{
   }
 });
 
-router.get('/children', (req, res, next) =>{
-  res.render('FrontEnd/child')
+router.get('/dashboard', (req, res, next) =>{
+  knex('userlog')
+  .then((userInfo) => {
+    console.log('u',userInfo);
+    let sendInfo = [];
+    for (var i = 0; i < userInfo.length; i++) {
+      var appointmentTime = tConvert(userInfo[i]['appointment-time']);
+      var parsedInfo = {};
+      parsedInfo['firstName'] = userInfo[i].firstName ;
+      parsedInfo['lastName'] = userInfo[i].lastName;
+      parsedInfo['appointment-time'] = appointmentTime;
+      parsedInfo['created_at'] = userInfo[i]['created_at'].toLocaleTimeString();
+      parsedInfo['paid'] = userInfo[i].paid;
+      sendInfo.push(parsedInfo);
+    }
+    console.log('p',sendInfo);
+    res.render('FrontEnd/index', {
+      data: sendInfo,
+    });
+  })
 });
 // router.post('/items', (req, res) => {
 //   console.log('HEADERS', req.headers);
@@ -75,5 +93,17 @@ router.get('/children', (req, res, next) =>{
 //     });
 //   });
 // });
+
+function tConvert (time) {
+  // Check correct time format and split into components
+  time = time.toString ().match (/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
+
+  if (time.length > 1) { // If time format correct
+    time = time.slice (1);  // Remove full string match value
+    time[5] = +time[0] < 12 ? ' AM' : ' PM'; // Set AM/PM
+    time[0] = +time[0] % 12 || 12; // Adjust hours
+  }
+  return time.join (''); // return adjusted time or original string
+}
 
 module.exports = router;
