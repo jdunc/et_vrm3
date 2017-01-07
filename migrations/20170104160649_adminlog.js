@@ -3,8 +3,8 @@
 exports.up = function(knex) {
     return knex.schema.createTable('adminlog', (table) => {
         table.increments();
-        table.string('firstName').notNullable().defaultTo('');
-        table.string('lastName').notNullable().defaultTo('');
+        table.string('userName').notNullable().defaultTo('');
+        // table.string('lastName').notNullable().defaultTo('');
         table.specificType('hashed_password', 'char(60)').notNullable();
         // table.time('check-in-time');
         table.boolean('admin').notNullable().defaultTo(false);

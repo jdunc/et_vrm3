@@ -424,6 +424,7 @@ ul.sidebar-menu li a.active i {
     /*padding: 20px;*/
     height: 280px;
     width: 400px;
+    -webkit-filter: contrast(100%);
 }
 
 .img-circle1 {
@@ -438,6 +439,7 @@ ul.sidebar-menu li a.active i {
     /*padding: 15px;*/
     height: 280px;
     width: 400px;
+    -webkit-filter: contrast(100%);
 }
 
 .flex {
