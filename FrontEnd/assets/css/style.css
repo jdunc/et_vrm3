@@ -480,11 +480,19 @@ ul.sidebar-menu li a.active i {
 }
 
 #tapit3 {
-    margin-top: 25px;
+    margin-top: 20px;
     margin-right: 30px;
     background-color: #8470FF;
     width: 300px;
-    height: 80px;
+    height: 110px;
+    border-color: #8470FF;
+}
+#payLater {
+    margin-top: 20px;
+    margin-right: 30px;
+    background-color: #8470FF;
+    width: 300px;
+    height: 110px;
     border-color: #8470FF;
 }
 

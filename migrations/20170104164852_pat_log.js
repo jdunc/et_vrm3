@@ -5,10 +5,9 @@ exports.up = function(knex) {
         table.increments();
         table.string('firstName').notNullable().defaultTo('');
         table.string('lastName').notNullable().defaultTo('');
-        table.time('check-in-time');
-        table.boolean('paid').defaultTo(false);
-        table.integer('adminlog_id').unsigned().index().references('id').inTable('adminlog').onDelete('CASCADE');
-
+        table.time('appointment-time');
+        table.string('paid').defaultTo(false);
+        // table.integer('adminlog_id').unsigned().index().references('id').inTable('adminlog').onDelete('CASCADE');
         table.timestamps(true, true);
     })
 };
