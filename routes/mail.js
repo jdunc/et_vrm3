@@ -13,10 +13,11 @@ const mailgun = require('mailgun-js')({apiKey: api_key, domain: domain});
 
 router.post('/email', (req, res, next) =>{
 console.log('sent email');
+var appointment = tConvert(req.body['appointment-time']);
   var data = {
     from: 'et.visitor@etsimple.com',
     to: 'jordandunc@gmail.com',
-    subject: 'Your Visitor Has Arrived!',
+    subject: `Your ${appointment} Has Arrived!`,
     html: `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office"><head>
 
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -127,6 +128,24 @@ console.log('sent email');
           table[class="container"] {
               width: 500px !important;
           }
+        }
+        #patientInfo{
+          border-spacing: 0;border-collapse: collapse;vertical-align: top;max-width: 500px;margin: 0 auto;text-align: inherit
+        }
+        #patientInfo tr{
+          vertical-align: top;
+        }
+        #patientInfo tr td{
+          word-break: break-word;border-collapse: collapse !important;vertical-align: top;padding-top: 10px;padding-right: 10px;padding-bottom: 10px;padding-left: 10px
+        }
+        h5{
+          color:#555555;font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif; margin: 0;text-align: right;font-size: 24px; line-height: 28px;
+        }
+        .td1{
+          width:50%;
+        }
+        td p {
+          color:#555555;font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif; margin: 0;text-align: left;font-size: 24px; line-height: 28px;
         }
       </style>
     </head>
@@ -258,60 +277,22 @@ console.log('sent email');
                             <tr>
                                 <td>
                         <![endif]-->
-                        <table cellpadding="0" cellspacing="0" align="center" width="100%" border="0" class="container" style="border-spacing: 0;border-collapse: collapse;vertical-align: top;max-width: 500px;margin: 0 auto;text-align: inherit"><tbody><tr style="vertical-align: top"><td width="100%" style="word-break: break-word;border-collapse: collapse !important;vertical-align: top"><table cellpadding="0" cellspacing="0" width="100%" bgcolor="transparent" class="block-grid two-up" style="border-spacing: 0;border-collapse: collapse;vertical-align: top;width: 100%;max-width: 500px;color: #333;background-color: transparent"><tbody><tr style="vertical-align: top"><td style="word-break: break-word;border-collapse: collapse !important;vertical-align: top;background-color: transparent;text-align: center;font-size: 0"><!--[if (gte mso 9)|(IE)]><table width="100%" align="center" bgcolor="transparent" cellpadding="0" cellspacing="0" border="0"><tr><![endif]--><!--[if (gte mso 9)|(IE)]><td valign="top" width="250" style="width:250px;"><![endif]--><div class="col num6" style="display: inline-block;vertical-align: top;text-align: center;width: 250px"><table cellpadding="0" cellspacing="0" align="center" width="100%" border="0" style="border-spacing: 0;border-collapse: collapse;vertical-align: top"><tbody><tr style="vertical-align: top"><td style="word-break: break-word;border-collapse: collapse !important;vertical-align: top;background-color: transparent;padding-top: 5px;padding-right: 0px;padding-bottom: 5px;padding-left: 0px;border-top: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;border-left: 0px solid transparent"><table cellpadding="0" cellspacing="0" width="100%" style="border-spacing: 0;border-collapse: collapse;vertical-align: top">
-      <tbody><tr style="vertical-align: top">
-        <td style="word-break: break-word;border-collapse: collapse !important;vertical-align: top;padding-top: 10px;padding-right: 10px;padding-bottom: 10px;padding-left: 10px">
-          <div style="color:#555555;line-height:120%;font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;">
-          	<div style="font-size:12px;line-height:14px;color:#555555;font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;text-align:left;"><p style="margin: 0;font-size: 12px;line-height: 14px;text-align: right"><span style="font-size: 24px; line-height: 28px;"><span style="font-size: 24px; line-height: 28px;" id="_mce_caret" data-mce-bogus="true"><strong>﻿</strong></span><strong>Name:</strong></span></p></div>
-          </div>
-        </td>
-      </tr>
-    </tbody></table>
-    <table cellpadding="0" cellspacing="0" width="100%" style="border-spacing: 0;border-collapse: collapse;vertical-align: top">
-      <tbody><tr style="vertical-align: top">
-        <td style="word-break: break-word;border-collapse: collapse !important;vertical-align: top;padding-top: 10px;padding-right: 10px;padding-bottom: 10px;padding-left: 10px">
-          <div style="color:#555555;line-height:120%;font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;">
-          	<div style="font-size:12px;line-height:14px;color:#555555;font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;text-align:left;"><p style="margin: 0;font-size: 12px;line-height: 14px;text-align: right"><span style="font-size: 24px; line-height: 28px;"><strong>﻿Appointment Time</strong><strong>:</strong></span></p></div>
-          </div>
-        </td>
-      </tr>
-    </tbody></table>
-    <table cellpadding="0" cellspacing="0" width="100%" style="border-spacing: 0;border-collapse: collapse;vertical-align: top">
-      <tbody><tr style="vertical-align: top">
-        <td style="word-break: break-word;border-collapse: collapse !important;vertical-align: top;padding-top: 10px;padding-right: 10px;padding-bottom: 10px;padding-left: 10px">
-          <div style="color:#555555;line-height:120%;font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;">
-          	<div style="font-size:12px;line-height:14px;color:#555555;font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;text-align:left;"><p style="margin: 0;font-size: 12px;line-height: 14px;text-align: right"><span style="font-size: 24px; line-height: 28px;"><span style="font-size: 24px; line-height: 28px;" id="_mce_caret" data-mce-bogus="true"><strong>﻿</strong></span><strong>Name:</strong></span></p></div>
-          </div>
-        </td>
-      </tr>
-    </tbody></table>
-    </td></tr></tbody></table></div><!--[if (gte mso 9)|(IE)]></td><![endif]--><!--[if (gte mso 9)|(IE)]><td valign="top" width="250" style="width:250px;"><![endif]--><div class="col num6" style="display: inline-block;vertical-align: top;text-align: center;width: 250px"><table cellpadding="0" cellspacing="0" align="center" width="100%" border="0" style="border-spacing: 0;border-collapse: collapse;vertical-align: top"><tbody><tr style="vertical-align: top"><td style="word-break: break-word;border-collapse: collapse !important;vertical-align: top;background-color: transparent;padding-top: 5px;padding-right: 0px;padding-bottom: 5px;padding-left: 0px;border-top: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;border-left: 0px solid transparent"><table cellpadding="0" cellspacing="0" width="100%" style="border-spacing: 0;border-collapse: collapse;vertical-align: top">
-      <tbody><tr style="vertical-align: top">
-        <td style="word-break: break-word;border-collapse: collapse !important;vertical-align: top;padding-top: 10px;padding-right: 10px;padding-bottom: 10px;padding-left: 10px">
-          <div style="color:#555555;line-height:120%;font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;">
-          	<div style="font-size:12px;line-height:14px;color:#555555;font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;text-align:left;"><p style="margin: 0;font-size: 12px;line-height: 14px"><span style="font-size: 24px; line-height: 28px;">${req.body['child-first-name']} ${req.body['child-last-name']}</span></p></div>
-          </div>
-        </td>
-      </tr>
-    </tbody></table>
-    <table cellpadding="0" cellspacing="0" width="100%" style="border-spacing: 0;border-collapse: collapse;vertical-align: top">
-      <tbody><tr style="vertical-align: top">
-        <td style="word-break: break-word;border-collapse: collapse !important;vertical-align: top;padding-top: 10px;padding-right: 10px;padding-bottom: 10px;padding-left: 10px">
-          <div style="color:#555555;line-height:120%;font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;">
-          	<div style="font-size:12px;line-height:14px;color:#555555;font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;text-align:left;"><p style="margin: 0;font-size: 12px;line-height: 14px"><span style="font-size: 24px; line-height: 28px;">${req.body['appointment-time']}</span></p></div>
-          </div>
-        </td>
-      </tr>
-    </tbody></table>
-    <table cellpadding="0" cellspacing="0" width="100%" style="border-spacing: 0;border-collapse: collapse;vertical-align: top">
-      <tbody><tr style="vertical-align: top">
-        <td style="word-break: break-word;border-collapse: collapse !important;vertical-align: top;padding-top: 10px;padding-right: 10px;padding-bottom: 10px;padding-left: 10px">
-          <div style="color:#555555;line-height:120%;font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;">
-          	<div style="font-size:12px;line-height:14px;color:#555555;font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;text-align:left;"><p style="margin: 0;font-size: 12px;line-height: 14px"><span style="font-size: 24px; line-height: 28px;">First Last</span></p></div>
-          </div>
-        </td>
-      </tr>
-    </tbody></table>
+                        <table id="patientInfo" cellpadding="0" cellspacing="0" align="center" width="100%" border="0" class="container" style="border-spacing: 0;border-collapse: collapse;vertical-align: top;max-width: 500px;margin: 0 auto;text-align: inherit">
+                        <tbody>
+                        <tr><td class="td1"><h5>Child Name:</h5></td><td><p>${req.body['child-first-name']} ${req.body['child-last-name']}</p></td></tr>
+                        <tr><td class="td1"><h5>Parent Name:</h5></td><td><p>${req.body['parent-name']}</p></td></tr>
+                        <tr><td class="td1"><h5>Appointment Time:</h5></td><td><p>${appointment}</p></td></tr>
+                        <tr><td class="td1"><h5>Stress Rating:</h5></td><td><p>${req.body['stress-rating']}</p></td></tr>
+                        <tr><td class="td1"><h5>Medications:</h5></td><td><p>${req.body['medication']}</p></td></tr>
+                        <tr><td class="td1"><h5>Medication Change:</h5></td><td><p>${req.body['medication-change']}</p></td></tr>
+                        <tr><td class="td1"><h5>School Changes:</h5></td><td><p>${req.body['school']}</p></td></tr>
+                        <tr><td class="td1"><h5>Home Changes:</h5></td><td><p>${req.body['home']}</p></td></tr>
+                        <tr><td class="td1"><h5>Environmental Changes:</h5></td><td><p>${req.body['environmental']}</p></td></tr>
+                        <tr><td class="td1"><h5>Physical Changes:</h5></td><td><p>${req.body['physical']}</p></td></tr>
+                        <tr><td class="td1"><h5>Positive Notes:</h5></td><td><p>${req.body['positive']}</p></td></tr>
+                        <tr><td class="td1"><h5>Questions and Concerns:</h5></td><td><p>${req.body['questions']}</p></td></tr>
+                      </tbody>
+                        </table>
     </td></tr></tbody></table></div><!--[if (gte mso 9)|(IE)]></td><![endif]--><!--[if (gte mso 9)|(IE)]></td></tr></table><![endif]--></td></tr></tbody></table></td></tr></tbody></table>
                         <!--[if mso]>
                         </td></tr></table>
@@ -377,5 +358,17 @@ console.log('sent email');
   res.send('sent email')
 
 });
+
+function tConvert (time) {
+  // Check correct time format and split into components
+  time = time.toString ().match (/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
+
+  if (time.length > 1) { // If time format correct
+    time = time.slice (1);  // Remove full string match value
+    time[5] = +time[0] < 12 ? ' AM' : ' PM'; // Set AM/PM
+    time[0] = +time[0] % 12 || 12; // Adjust hours
+  }
+  return time.join (''); // return adjusted time or original string
+}
 
 module.exports = router;
