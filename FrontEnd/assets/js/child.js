@@ -42,5 +42,12 @@ $(document).ready(function(){
    .then((data) => {
      console.log('database info submitted:',data);
    })
+   $.ajax({
+     method: "POST",
+     data: JSON.stringify(formData),
+     url: '/email',
+     dataType: 'json',
+     contentType: 'application/json; charset=UTF-8'
+   })
  });//end on click submit without payment
 }) //end on document ready

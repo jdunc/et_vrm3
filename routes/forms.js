@@ -49,19 +49,24 @@ router.post('/child', (req, res, next) =>{
 });
 
 router.get('/dashboard', (req, res, next) =>{
-  knex('userlog')
+  knex('userlog').orderBy('created_at', 'desc')
   .then((userInfo) => {
     console.log('u',userInfo);
     let sendInfo = [];
     for (var i = 0; i < userInfo.length; i++) {
-      var appointmentTime = tConvert(userInfo[i]['appointment-time']);
-      var parsedInfo = {};
-      parsedInfo['firstName'] = userInfo[i].firstName ;
-      parsedInfo['lastName'] = userInfo[i].lastName;
-      parsedInfo['appointment-time'] = appointmentTime;
-      parsedInfo['created_at'] = userInfo[i]['created_at'].toLocaleTimeString();
-      parsedInfo['paid'] = userInfo[i].paid;
-      sendInfo.push(parsedInfo);
+      var today = new Date();
+      today = today.toDateString();
+      var checkInTime = userInfo[i]['created_at'].toDateString();
+      if(today === checkInTime){
+        var appointmentTime = tConvert(userInfo[i]['appointment-time']);
+        var parsedInfo = {};
+        parsedInfo['firstName'] = userInfo[i].firstName ;
+        parsedInfo['lastName'] = userInfo[i].lastName;
+        parsedInfo['appointment-time'] = appointmentTime;
+        parsedInfo['created_at'] = userInfo[i]['created_at'].toLocaleTimeString();
+        parsedInfo['paid'] = userInfo[i].paid;
+        sendInfo.push(parsedInfo);
+    }
     }
     console.log('p',sendInfo);
     res.render('FrontEnd/index', {
