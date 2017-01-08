@@ -16,6 +16,7 @@ const mailgun = require('mailgun-js')({apiKey: api_key, domain: domain});
 
 router.post('/email', (req, res, next) =>{
 console.log('sent email');
+var today = new Date();
 var appointment = tConvert(req.body['appointment-time']);
 var $html = `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office"><head>
 
@@ -349,16 +350,16 @@ var $html = `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "ht
 
 </body></html>
 `;
-pdf.create($html, options).toFile('./routes/tmpPDF/email.pdf', function(err, res) {
+pdf.create($html, options).toFile(`./routes/tmpPDF/${req.body['child-last-name']}_${req.body['child-first-name']}_${today}.pdf`, function(err, res) {
   if (err) return console.log(err);
   console.log(res); // { filename: '/app/businesscard.pdf' }
 
-var filepath = path.join(__dirname, '/tmpPDF/email.pdf');
+var filepath = path.join(__dirname, `./tmpPDF/${req.body['child-last-name']}_${req.body['child-first-name']}_${today}.pdf`);
 var $file = fs.readFileSync(filepath);
 
   var data = {
     'from': 'et.visitor@etsimple.com',
-    'to': 'jordandunc@gmail.com',
+    'to': 'info@uplift-counseling.com',
     'subject': `Your ${appointment} Has Arrived!`,
     attachment: filepath,
     'html': `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office"><head>
