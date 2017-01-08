@@ -68,6 +68,7 @@
                         <a href="index.html"><img src="assets/img/uplift4.jpg" class="img-circle" width="200"></a>
                     </p>
                     <h5 class="centered">Uplift Counseling</h5>
+                    <h5 class="centered">Hi, Heena Khan</h5>
 
                     <li class="mt">
                         <a class="active" href="index.html">
@@ -119,18 +120,28 @@
                                 </tr>
                             </thead>
                             <tbody>
-                              <tr>
-                                <% data.forEach((client) => { %>
-                                <td><%= client.firstName %></td>
-                                <td><%= client.lastName %></td>
-                                <td><%= client['appointment-time'] %></td>
-                                <td><%= client.created_at %></td>
-                                <td><%= client.paid %></td>
-                              </tr>
-                              <% }); %>
+                                <tr>
+                                    <% data.forEach((client) => { %>
+                                        <td>
+                                            <%= client.firstName %>
+                                        </td>
+                                        <td>
+                                            <%= client.lastName %>
+                                        </td>
+                                        <td>
+                                            <%= client['appointment-time'] %>
+                                        </td>
+                                        <td>
+                                            <%= client.created_at %>
+                                        </td>
+                                        <td>
+                                            <%= client.paid %>
+                                        </td>
+                                </tr>
+                                <% }); %>
 
 
-                                <!-- <tr>
+                                    <!-- <tr>
                                     <td>2</td>
                                     <td>Jacob</td>
                                     <td>Thornton</td>
@@ -211,7 +222,7 @@
         <!--footer start-->
         <footer class="site-footer">
             <div class="text-center">
-                ET. Visitor Manager 2016
+                ET. Visitor Manager 2017
                 <a href="index.html#" class="go-top">
                     <i class="fa fa-angle-up"></i>
                 </a>
