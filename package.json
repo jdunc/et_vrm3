@@ -21,12 +21,17 @@
     "chai": "^3.5.0",
     "cookieparser": "^0.1.0",
     "debug": "^2.6.0",
+    "ejs": "^2.5.5",
     "express": "^4.14.0",
+    "html-pdf": "^2.1.0",
     "knex": "^0.12.6",
+    "mailgun-js": "^0.8.0",
     "mocha": "^3.2.0",
     "mongodb": "^2.2.19",
     "mongoose": "^4.7.6",
     "morgan": "^1.7.0",
-    "pg": "^6.1.2"
+    "nodemailer": "^2.7.0",
+    "pg": "^6.1.2",
+    "quickbooks": "^1.0.3"
   }
 }
