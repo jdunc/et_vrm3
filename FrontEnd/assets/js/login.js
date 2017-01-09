@@ -13,7 +13,7 @@ $(document)
                     .val();
                 console.log(user_name, password);
                 $.ajax({
-                    url: '/session',
+                    url: '/dashboard',
                     method: "POST",
                     data: {
                       user_name: user_name,
