@@ -1,6 +1,7 @@
 $(document).ready(function(){
   console.log('child js loaded');
  $('#tapit3').click( function(e){
+   window.location.href = "/checked-in";
    e.preventDefault();
    let formData = {};
    $('.childFormInfo').each(function(){
@@ -18,7 +19,17 @@ $(document).ready(function(){
      contentType: 'application/json; charset=UTF-8'
    })
    .then((data) => {
-     console.log('submitted:',data);
+     console.log('database info submitted:',data);
+     $.ajax({
+       method: "POST",
+       data: JSON.stringify(formData),
+       url: '/email',
+       dataType: 'json',
+       contentType: 'application/json; charset=UTF-8'
+     })
+   })
+   .then((data) => {
+     window.location.href = "/checked-in";
    })
  });//end on click submit with payment
 
@@ -41,13 +52,16 @@ $(document).ready(function(){
    })
    .then((data) => {
      console.log('database info submitted:',data);
+     $.ajax({
+       method: "POST",
+       data: JSON.stringify(formData),
+       url: '/email',
+       dataType: 'json',
+       contentType: 'application/json; charset=UTF-8'
+     })
    })
-   $.ajax({
-     method: "POST",
-     data: JSON.stringify(formData),
-     url: '/email',
-     dataType: 'json',
-     contentType: 'application/json; charset=UTF-8'
+   .then((data) => {
+     window.location.href = "/checked-in";
    })
  });//end on click submit without payment
 }) //end on document ready
