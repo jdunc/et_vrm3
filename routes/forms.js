@@ -3,7 +3,6 @@
 const express = require('express');
 const router = express.Router();
 const knex = require('../knex');
-const bcrypt = require('bcrypt-as-promised');
 
 router.post('/adult', (req, res, next) => {
     console.log('post to adult');
@@ -49,70 +48,72 @@ router.post('/child', (req, res, next) => {
     }
 });
 
-router.post('/dashboard', (req, res, next) => {
-  const {
-      user_name,
-      password
-  } = req.body;
-  if (!user_name || user_name.trim() === '') {
-      const err = new Error('user_name must not be blank');
-      err.status = 400;
-      return next(err);
-  }
-  if (!password || password.trim() === '') {
-      const err = new Error('Password must not be blank');
-      err.status = 400;
-      return next(err);
-  }
-  let user;
-  knex('users')
-      .where('user_name', user_name)
-      .first()
-      .then((row) => {
-          if (!row) {
-              const err = new Error('Unauthorized');
-              err.status = 401;
+router.get('/dashboard', (req, res, next) => {
+  //render the dashboard page
+    knex('userlog').orderBy('created_at', 'desc')
+        .then((userInfo) => {
+            console.log('u', userInfo);
+            let sendInfo = [];
+            for (var i = 0; i < userInfo.length; i++) {
+                var today = new Date();
+                today = today.toDateString();
+                var checkInTime = userInfo[i]['created_at'].toDateString();
+                if (today === checkInTime) {
+                    var appointmentTime = tConvert(userInfo[i]['appointment-time']);
+                    var parsedInfo = {};
+                    parsedInfo['firstName'] = userInfo[i].firstName;
+                    parsedInfo['lastName'] = userInfo[i].lastName;
+                    parsedInfo['appointment-time'] = appointmentTime;
+                    parsedInfo['created_at'] = userInfo[i]['created_at'].toLocaleTimeString();
+                    parsedInfo['paid'] = userInfo[i].paid;
+                    sendInfo.push(parsedInfo);
+                }
+            }
+            console.log('p', sendInfo);
+            res.render('FrontEnd/index', {
+                data: sendInfo,
+            });
+        }) //end of registering the dashboard page
 
-              throw err;
-          }
-          user = row;
-          return bcrypt.compare(password, row.hashed_password);
-      })
-      .then(() => {
-        //render the dashboard page
-          knex('userlog').orderBy('created_at', 'desc')
-              .then((userInfo) => {
-                  console.log('u', userInfo);
-                  let sendInfo = [];
-                  for (var i = 0; i < userInfo.length; i++) {
-                      var today = new Date();
-                      today = today.toDateString();
-                      var checkInTime = userInfo[i]['created_at'].toDateString();
-                      if (today === checkInTime) {
-                          var appointmentTime = tConvert(userInfo[i]['appointment-time']);
-                          var parsedInfo = {};
-                          parsedInfo['firstName'] = userInfo[i].firstName;
-                          parsedInfo['lastName'] = userInfo[i].lastName;
-                          parsedInfo['appointment-time'] = appointmentTime;
-                          parsedInfo['created_at'] = userInfo[i]['created_at'].toLocaleTimeString();
-                          parsedInfo['paid'] = userInfo[i].paid;
-                          sendInfo.push(parsedInfo);
-                      }
-                  }
-                  console.log('p', sendInfo);
-                  res.render('FrontEnd/index', {
-                      data: sendInfo,
-                  });
-              }) //end of registering the dashboard page
-      })
-      .catch(bcrypt.MISMATCH_ERROR, () => {
-          const err = new Error('Unauthorized');
-          err.status = 401;
-          throw err;
-      })
-      .catch((err) => {
-          next(err);
-      });
+  // const {
+  //     user_name,
+  //     password
+  // } = req.body;
+  // if (!user_name || user_name.trim() === '') {
+  //     const err = new Error('user_name must not be blank');
+  //     err.status = 400;
+  //     return next(err);
+  // }
+  // if (!password || password.trim() === '') {
+  //     const err = new Error('Password must not be blank');
+  //     err.status = 400;
+  //     return next(err);
+  // }
+  // let user;
+  // knex('users')
+  //     .where('user_name', user_name)
+  //     .first()
+  //     .then((row) => {
+  //         if (!row) {
+  //             const err = new Error('Unauthorized');
+  //             err.status = 401;
+  //
+  //             throw err;
+  //         }
+  //         user = row;
+  //         return bcrypt.compare(password, row.hashed_password);
+  //     })
+  //     .then(() => {
+  //
+  //     })
+  //     .catch(bcrypt.MISMATCH_ERROR, () => {
+  //         const err = new Error('Unauthorized');
+  //         err.status = 401;
+  //         throw err;
+  //     })
+  //     .catch((err) => {
+  //         next(err);
+  //     });
 
 
 });
