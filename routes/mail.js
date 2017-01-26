@@ -632,7 +632,7 @@ var $file = fs.readFileSync(filepath);
 
   var data = {
     'from': 'et.visitor@etsimple.com',
-    'to': 'jordandunc@gmail.com',
+    'to': ['info@uplift-counseling.com','shahzadkhan3iii7@gmail.com'],
     'subject': `Your ${appointment} Has Arrived!`,
     attachment: filepath,
     'html': `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office"><head>
